@@ -11,6 +11,10 @@ class MyWindow(QMainWindow, form_class): #QMainWindow 메서드와 , form class 
     def __init__(self):
         super().__init__()
         self.setupUi(self) #form_class 클래스에 정의된 메서드로 QtDesigner 에서 만든 클래스를 호출
+        self.pushButton.clicked.connect(self.btn_clicked) #클릭 이벤트 추가 Designer에서 만든 기능연결
+
+    def btn_clicked(self): #btn_clicked 기능 추가
+        print("Button clicked") #버튼 클릭시 활성화 출력이벤트
 
 app = QApplication(sys.argv)
 window = MyWindow()
