@@ -1,7 +1,7 @@
 #변동성 돌파전략 구현
 
 #빗썸 Bithumb API 활용
-# 잔고조회
+# 잔고조회 p.252
 
 import pybithumb
 
