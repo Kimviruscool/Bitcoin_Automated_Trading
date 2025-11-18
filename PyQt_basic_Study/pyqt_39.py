@@ -1,4 +1,4 @@
-#지갑 조회와 매수
+#지갑 조회와 매도
 
 
 import pybithumb
@@ -19,5 +19,5 @@ print(float(sell_price))
 unit = krw/float(sell_price) # 몇개 구매가능한지 확인
 print(f'{unit:.8f}')
 
-order = bithumb.buy_market_order("BTC", krw)
+order = bithumb.sell_limit_order("BTC", 4000000, 1)
 print(order)
