@@ -1,4 +1,4 @@
-# 매수 시도
+# 매도 시도
 
 import pybithumb
 import time
@@ -8,6 +8,9 @@ con_key = "??"
 sec_key = "??"
 
 bithumb = pybithumb.Bithumb(con_key, sec_key)
+
+now = datetime.datetime.now()
+mid = datetime.datetime(now.year, now.month, now.day) + datetime.timedelta(1)
 
 def get_target_price(ticker) :
     df = pybithumb.get_ohlcv(ticker)
@@ -20,31 +23,25 @@ def get_target_price(ticker) :
     target = today_open + (yesterday_high - yesterday_low) * 0.5 # 목표값 당일시가 + (전일고가 - 전일저가) * 0.5
     return target
 
-now = datetime.datetime.now()
-mid = datetime.datetime(now.year, now.month, now.day) + datetime.timedelta(1)
-target_price = get_target_price("BTC")
+# 가격 조회 및 코인구매 정의
+def buy_crypto_currency(ticker) :
+    krw = bithumb.get_balance("BTC")[2]
+    orderbook = pybithumb.get_orderbook(ticker)
+    sell_price = orderbook['asks'][0]['price']
+    unit = krw/float(sell_price)
+    bithumb.buy_market_order(ticker, unit)
 
 while True :
     now = datetime.datetime.now()
-    if mid < now < mid + datetime.timedelta(seconds=10):
+    if mid < now < mid + datetime.timedelta(second=10):
         target_price = get_target_price("BTC")
+        now = datetime.datetime.now()
         mid = datetime.datetime(now.year, now.month, now.day) + datetime.timedelta(1)
+        sell_crypto_currency("BTC")
 
-    current_price = pybithumb.get_current_price("BTC")
-    if current_price < target_price:
-        krw = bithumb.get_balance("BTC")[2]
-        orderbook = pybithumb.get_orderbook("BTC")
-        sell_price = orderbook['asks'][0]['price']
-        unit = krw/float(sell_price)
-        bithumb.buy_market_order("BTC", unit)
-
+    # 매도 시도
+    def sell_crypto_currency(ticker):
+        unit = bithumb.get_balance(ticker)[0]
+        bithumb.sell_market_order(ticker, unit)
 
     time.sleep(1)
-
-    # 가격 조회 및 코인구매 정의
-    def buy_crypto_currency(ticker) :
-        krw = bithumb.get_balance("BTC")[2]
-        orderbook = pybithumb.get_orderbook(ticker)
-        sell_price = orderbook['asks'][0]['price']
-        unit = krw/float(sell_price)
-        bithumb.buy_market_order(ticker, unit)
