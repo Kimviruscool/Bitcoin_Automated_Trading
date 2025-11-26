@@ -7,8 +7,6 @@ import datetime
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
-from PyQt_basic_Study.pyqt_43_정리 import current_price
-
 
 async def bithumb_ws_client(q):
     uri = "wss://pubwss.bithumb.com/pub/ws"

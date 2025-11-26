@@ -12,7 +12,7 @@ class MyWindow(QMainWindow): #Mywindow class 생성 (PyQt5가 제공하는 클�
         #자식클래스에 초기화 함수를 사용하려면 self.__init__() 사용
         self.setGeometry(100,200,300,400) #setGeometry를 사용하여 윈도우 기준화면1에 (왼쪽여백1,왼쪽여백높이2,윈도우사이즈,윈도우높이) 인터페이스를 생성
         self.setWindowTitle("PyQt5") #setWindowTitle을 사용하여 제목, 타이틀바 변경
-        self.setWindowIcon(QIcon("graph.png")) #setWindowIcon(QIcon("아이콘이름.파일속성"))
+        self.setWindowIcon(QIcon("../file/graph.png")) #setWindowIcon(QIcon("아이콘이름.파일속성"))
 
         btn = QPushButton("버튼1", self) #버튼 생성
         btn.move(10,10) #move 이용해서 윈도우 내 버튼에 여백 x,y좌표 여백 x= 10, y= 10 만큼 추가
