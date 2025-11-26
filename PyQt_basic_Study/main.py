@@ -10,8 +10,6 @@ import datetime
 import time
 from PyQt5.QtCore import QThread, pyqtSignal
 
-from PyQt_basic_Study import volatility
-
 #추가5
 from volatility import *
 
@@ -32,10 +30,13 @@ class VolatilityWorker(QThread):
         ma5 = get_yesterday_ma5(self.ticker)
         wait_flag = False
 
+        #Custom
+        target_price = get_target_price(self.ticker)
+
         while self.alive:
             try:
                 now = datetime.datetime.now()
-                if mid < now < mid + datetime.delta(seconds=10):
+                if mid < now < mid + datetime.timedelta(seconds=10):
                     target_price = get_target_price(self.ticker)
                     mid = datetime.datetime(now.year, now.month, now.day) + datetime.timedelta(1)
                     ma5 = get_yesterday_ma5(self.ticker)
@@ -59,8 +60,9 @@ class VolatilityWorker(QThread):
                         self.tradingSent.emit(tstring, "매수", result['data']['order_qty'])
                         wait_flag = True
 
-            except :
-                pass
+            except Exception as e :
+                print(f"에러발생 {e}")
+                # pass
             time.sleep(1)
 
     def close(self):
