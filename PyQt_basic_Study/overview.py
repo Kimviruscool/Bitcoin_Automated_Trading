@@ -53,7 +53,7 @@ class OverViewWorker(QThread):
             #                    int(data['content']['prevClosePrice' ]))
 
 class OverviewWidget(QWidget):
-    def __init__(self, parent=None, ticker="BTC"):
+    def __init__(self, parent=None, ticker="XRP"):
         super().__init__(parent)
         uic.loadUi("MyWindowUI/overview.ui", self)
         self.ticker = ticker

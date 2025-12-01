@@ -32,7 +32,7 @@ class OrderbookWorker(QThread):
         self.alive = False
 
 class OrderbookWidget(QWidget):
-    def __init__(self, parent=None, ticker="BTC"):
+    def __init__(self, parent=None, ticker="XRP"):
         super().__init__()
         uic.loadUi("MyWindowUI/orderbook.ui", self)
         self.ticker = ticker
