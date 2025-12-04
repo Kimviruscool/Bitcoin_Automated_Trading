@@ -89,11 +89,12 @@ class VolatilityWorker(QThread):
 
                         timestamp = result['data']['order_date']
                         dt = datetime.datetime.fromtimestamp(int(int(timestamp) /1000000))
+                        tstring = dt.strftime("%Y/%m/%d %H:%M%S")
                         self.tradingSent.emit(tstring, f"손절매도({yield_rate:.2f}%)", result['data']['order_qty'])
                         wait_flag = False
                         
                 #3. 매수 진입 로직 변동성 돌파
-                if wait_flag == True :
+                if wait_flag == False :
                     # 현재가가 목표가를 넘고 5일 이동평균선보다 높으면 매수
                     if (current_price > target_price) and (current_price > ma5) :
                         desc = buy_crypto_currency(self.bithumb, self.ticker)
