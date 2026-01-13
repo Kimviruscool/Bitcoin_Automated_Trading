@@ -124,7 +124,7 @@ class MainWindow(QMainWindow, form_class):
         self.setupUi(self)
         self.setWindowTitle("Home Trading System")
 
-        self.ticker = "XRP"
+        self.ticker = "ETH"
         self.button.clicked.connect(self.clickBtn)
 
         with open("C:/Users/0000/Desktop/bithumb.txt") as f:

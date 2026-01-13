@@ -77,7 +77,7 @@ class MainWindow(QMainWindow, form_class):
         #추가1
         self.setWindowTitle("Home Trading System")
 
-        self.ticker = "XRP"
+        self.ticker = "ETH"
         self.button.clicked.connect(self.clickBtn)
 
         #추가3
